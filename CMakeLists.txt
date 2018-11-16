@@ -13,4 +13,10 @@ add_executable(delivery_receipt delivery_receipt.cpp)
 target_link_libraries(delivery_receipt sobjectizer::StaticLib)
 target_link_libraries(delivery_receipt sobjectizer::so5extra)
 
-install(TARGETS ${SAMPLE} DESTINATION bin)
+add_executable(asio_tp_hello_world asio_tp_hello_world.cpp)
+
+target_link_libraries(asio_tp_hello_world sobjectizer::StaticLib)
+target_link_libraries(asio_tp_hello_world sobjectizer::so5extra)
+if(WIN32)
+	target_link_libraries(asio_tp_hello_world wsock32 ws2_32)
+endif()
