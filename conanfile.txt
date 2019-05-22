@@ -1,5 +1,5 @@
 [requires]
-so5extra/1.2.1@stiffstream/testing
+so5extra/1.3.0@stiffstream/stable
 
 [generators]
 cmake
