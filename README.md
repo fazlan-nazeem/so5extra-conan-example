@@ -1,11 +1,10 @@
-This repository contains a couple of simple examples those use [so_5_extra](https://stiffstream.com/en/products/so_5_extra.html) via the corresponding Conan package.
+This repository contains a couple of simple examples those use [so5extra](https://github.com/Stiffstream/so5extra) via the corresponding Conan package.
 
 # How To Try
 
 ## Docker
 The simplest way is to use Docker and Dockerfile from the repository. For example:
 ```bash
-git clone https://github.com/Stiffstream/so5extra-conan-example
 cd so5extra-conan-example
 docker build -t so5-conan-example .
 docker run -it so5-conan-example /bin/bash
@@ -18,10 +17,6 @@ All necessary steps like installing Python, PIP, conan, CMake and so on are perf
 ## Manual Build
 To perform manual build it is necessary to have conan and CMake installed. Then you can do the following steps:
 ```bash
-# Add remote for conan to find so5extra package.
-conan remote add stiffstream https://api.bintray.com/conan/stiffstream/public
-# Add remote for conan to find Asio package.
-conan remote add public-conan https://api.bintray.com/conan/bincrafters/public-conan  
 # Clone the demo repository.
 git clone https://github.com/Stiffstream/so5extra-conan-example
 cd so5extra-conan-example
@@ -34,4 +29,13 @@ cmake --build . --config Release
 ./bin/delivery_receipt
 ./bin/asio_tp_hello_world
 ```
+
+Please note that the following commands maybe necessary too:
+
+```bash
+RUN conan profile new default --detect
+RUN conan profile update settings.compiler.libcxx=libstdc++11 default
+```
+
+They have to be issued just before calling `conan install`.
 

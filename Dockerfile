@@ -1,15 +1,16 @@
-FROM ubuntu:18.10
+FROM ubuntu:20.04
 
 # Prepare build environment
-RUN apt-get update && \
-    apt-get -qq -y install gcc g++ \
+RUN apt-get update
+RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
+RUN apt-get -qq -y install gcc g++ \
     cmake curl wget pkg-config \
     libtool
 RUN apt-get -qq -y install python3
 RUN apt-get -qq -y install python3-pip
 RUN pip3 install conan
-RUN conan remote add stiffstream https://api.bintray.com/conan/stiffstream/public
-RUN conan remote add public-conan https://api.bintray.com/conan/bincrafters/public-conan  
+RUN conan profile new default --detect
+RUN conan profile update settings.compiler.libcxx=libstdc++11 default
 
 RUN mkdir so5extra-conan-example
 COPY *.cpp so5extra-conan-example/
