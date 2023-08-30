@@ -8,7 +8,7 @@ RUN apt-get -qq -y install gcc g++ \
     libtool
 RUN apt-get -qq -y install python3
 RUN apt-get -qq -y install python3-pip
-RUN pip3 install conan
+RUN pip3 install conan==1.60.2
 RUN conan profile new default --detect
 RUN conan profile update settings.compiler.libcxx=libstdc++11 default
 
